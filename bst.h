@@ -490,8 +490,7 @@ void BinarySearchTree<Key, Value>::insert(const std::pair<const Key, Value> &key
             curr = curr->getRight();
         }
     }   
-}
-
+} 
 
 /**
 * A remove method to remove a specific key from a Binary Search Tree.
@@ -514,8 +513,10 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
 
                 if(curr == root_){
                     //std::cout << curr->getItem().second << std::endl;
-                    root_ = NULL; 
+                     
                     delete root_;
+                    root_ = NULL;
+                    curr = NULL;
                     break;
                 }
                 
@@ -528,6 +529,7 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
                 //std::cout << curr->getItem().second << std::endl;
                 curr->setParent(NULL);
                 delete curr; 
+                curr = NULL; 
                 break;
             }
             else if(curr->getLeft() == NULL || curr->getRight() == NULL){ // 1 children
@@ -539,6 +541,8 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
                         curr->getLeft()->setParent(NULL);
                         curr->setParent(NULL);
                         curr->setLeft(NULL);
+                        delete curr;
+                        curr = NULL;
                         break;
                     }
 
@@ -562,6 +566,8 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
                         curr->getRight()->setParent(NULL);
                         curr->setParent(NULL);
                         curr->setLeft(NULL);
+                        delete curr;
+                        curr = NULL; 
                         break;
                     }
                     
@@ -581,7 +587,8 @@ void BinarySearchTree<Key, Value>::remove(const Key& key)
                 }
                 //std::cout << curr->getItem().second << std::endl;
 
-                delete curr; 
+                delete curr;
+                curr = NULL; 
                 break;
 
             }
@@ -713,6 +720,7 @@ void BinarySearchTree<Key, Value>:: removeNode(Node<Key, Value>* current)
     removeNode(current->getLeft());
     removeNode(current->getRight());
     delete current;
+    current = NULL; 
 }
 
 

@@ -494,8 +494,8 @@ void AVLTree<Key, Value>:: remove(const Key& key)
                 if(curr == this->root_){
                     //std::cout << curr->getItem().second << std::endl;
                     curr->setBalance(0);
-                    this->root_ = NULL; 
                     delete this->root_;
+                    this->root_ = NULL; 
                     break;
                 }
                 
@@ -511,6 +511,7 @@ void AVLTree<Key, Value>:: remove(const Key& key)
                 //std::cout << curr->getItem().second << std::endl;
                 curr->setParent(NULL);
                 delete curr; 
+                curr = NULL;
                 break;
             }
             else if(curr->getLeft() == NULL || curr->getRight() == NULL){ // 1 children
@@ -522,6 +523,8 @@ void AVLTree<Key, Value>:: remove(const Key& key)
                         curr->getLeft()->setParent(NULL);
                         curr->setParent(NULL);
                         curr->setLeft(NULL);
+                        delete curr; 
+                        curr = NULL;
                         break;
                     }
 
@@ -547,6 +550,8 @@ void AVLTree<Key, Value>:: remove(const Key& key)
                         curr->getRight()->setParent(NULL);
                         curr->setParent(NULL);
                         curr->setLeft(NULL);
+                        delete curr; 
+                        curr = NULL;
                         break;
                     }
                     
@@ -568,6 +573,7 @@ void AVLTree<Key, Value>:: remove(const Key& key)
                 }
                 //std::cout << curr->getItem().second << std::endl;
                 delete curr; 
+                curr = NULL;
                 break;
 
             }
